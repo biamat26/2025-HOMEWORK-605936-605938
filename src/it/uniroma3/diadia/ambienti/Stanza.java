@@ -1,6 +1,5 @@
-
-
-
+package it.uniroma3.diadia.ambienti;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -23,7 +22,7 @@ public class Stanza {
     private Attrezzo[] attrezzi;
     private int numeroAttrezzi;
     
-    private Stanza[] stanzeAdiacenti;
+	private Stanza[] stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
     
 	private String[] direzioni;
@@ -68,9 +67,11 @@ public class Stanza {
      */
 	public Stanza getStanzaAdiacente(String direzione) {
         Stanza stanza = null;
-		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
-        	if (this.direzioni[i].equals(direzione))
+		for(int i=0; i<this.numeroStanzeAdiacenti; i++) {
+        	if (this.direzioni[i].equals(direzione)) {
         		stanza = this.stanzeAdiacenti[i];
+        	}
+		}
         return stanza;
 	}
 
@@ -89,8 +90,12 @@ public class Stanza {
     public String getDescrizione() {
         return this.toString();
     }
+    
+    public int getNumeroMassimoAttrezzi() {
+		return NUMERO_MASSIMO_ATTREZZI;
+	}
 
-    /**
+	/**
      * Restituisce la collezione di attrezzi presenti nella stanza.
      * @return la collezione di attrezzi nella stanza.
      */
@@ -98,12 +103,21 @@ public class Stanza {
         return this.attrezzi;
     }
 
+    public int getNumeroAttrezzi() {
+		return numeroAttrezzi;
+	}
+
+	public void setNumeroAttrezzi(int numeroAttrezzi) {
+		this.numeroAttrezzi = numeroAttrezzi;
+	}
+    
     /**
      * Mette un attrezzo nella stanza.
      * @param attrezzo l'attrezzo da mettere nella stanza.
      * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
+    	if(attrezzo == null) return false;
         if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
         	this.attrezzi[numeroAttrezzi] = attrezzo;
         	this.numeroAttrezzi++;
@@ -127,8 +141,11 @@ public class Stanza {
     		if (direzione!=null)
     			risultato.append(" " + direzione);
     	risultato.append("\nAttrezzi nella stanza: ");
-    	for (Attrezzo attrezzo : this.attrezzi) {
-    		risultato.append(attrezzo.toString()+" ");
+    	for(int i = 0; i < this.numeroAttrezzi; i++) {
+    		if(attrezzi[i] != null) {
+    			risultato.append(attrezzi[i].toString());
+    		}
+    		
     	}
     	return risultato.toString();
     }
@@ -138,13 +155,12 @@ public class Stanza {
 	* @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	*/
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-		boolean trovato;
-		trovato = false;
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
-				trovato = true;
+		for(int i = 0; i < this.numeroAttrezzi; i++) {
+			if(attrezzi[i].getNome().equals(nomeAttrezzo)) {
+				return true;
+			}
 		}
-		return trovato;
+		return false;
 	}
 
 	/**
@@ -157,7 +173,7 @@ public class Stanza {
 		Attrezzo attrezzoCercato;
 		attrezzoCercato = null;
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
+			if (attrezzo != null && attrezzo.getNome().equals(nomeAttrezzo))
 				attrezzoCercato = attrezzo;
 		}
 		return attrezzoCercato;	
@@ -169,8 +185,24 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		// TODO da implementare
-		return false;
+		
+		if (attrezzo == null) return false;
+		
+		for (int i = 0; i < this.numeroAttrezzi; i++) {
+	        //Ho trovato l'elemento da rimuovere
+	    	if (this.attrezzi[i].getNome().equals(attrezzo.getNome())) {
+	            
+	        	// Sposto tutti gli elementi a sinistra
+	            for (int j = i; j < this.numeroAttrezzi - 1; j++) {
+	                this.attrezzi[j] = this.attrezzi[j + 1];
+	            }
+	            
+	            this.attrezzi[this.numeroAttrezzi - 1] = null;
+	            this.numeroAttrezzi = this.numeroAttrezzi - 1;
+	            return true; 
+	        }
+	    }
+	    return false; // Se l'attrezzo non è stato trovato
 	}
 
 
