@@ -39,7 +39,7 @@ public class Labirinto {
 	
 	
 	private void creaLabirinto(){
-		/* crea gli attrezzi */
+		/* crea gli attrezzi    */
     	Attrezzo lanterna = new Attrezzo("lanterna",5);
 		Attrezzo osso = new Attrezzo("osso",6);
     	
