@@ -124,28 +124,6 @@ public class DiaDia {
 		}
 	}
 
-//	private void posa(String nomeAttrezzo) {
-//	    // Otteniamo l'attrezzo dalla borsa
-//	    Attrezzo attrezzoDaPosare = this.partita.getBorsa().removeAttrezzo(nomeAttrezzo);
-//
-//	    // Se l'attrezzo non è stato trovato nella borsa, informiamo l'utente
-//	    if (attrezzoDaPosare == null) {
-//	        console.mostraMessaggio("Attrezzo non presente nella borsa.");
-//	        return;
-//	    }
-//
-//	    // Tentiamo di posare l'attrezzo nella stanza corrente
-//	    if (this.partita.getStanzaCorrente().addAttrezzo(attrezzoDaPosare)) {
-//	        console.mostraMessaggio("Operazione riuscita");
-//	    } else {
-//	        // Se non si può posare l'attrezzo nella stanza, rimettiamo l'attrezzo nella borsa
-//	        this.partita.getBorsa().addAttrezzo(attrezzoDaPosare);
-//	        console.mostraMessaggio("Operazione non riuscita: la stanza non può contenere altri attrezzi");
-//	    }
-//	}
-
-	// implementazioni dei comandi dell'utente:
-
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
