@@ -29,7 +29,7 @@ class TestLabirinto {
 	
 	@Test
 	public void testStanzeAdiacenti() {
-		assertEquals("Biblioteca", labirinto.getEntrata().getStanzaAdiacente("nord").getNome());
+		assertEquals("Aula N11", labirinto.getEntrata().getStanzaAdiacente("est").getNome());
 		assertEquals("Atrio", labirinto.getUscita().getStanzaAdiacente("sud").getNome());
 	}
 
