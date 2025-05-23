@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.Map;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
@@ -16,11 +18,18 @@ public class Labirinto {
 	
 	private Stanza entrata;
 	private Stanza uscita;
+	private Map<String, Stanza> stanze;
 	
 	public Labirinto() {
 		creaLabirinto();
 	} 
 	
+	public Labirinto(Stanza entrata, Stanza uscita, Map<String, Stanza> stanze) {
+		this.entrata = entrata;
+		this.uscita = uscita;
+		this.stanze = stanze;
+	}
+
 	public Stanza getUscita() {
 		return uscita;
 	}
