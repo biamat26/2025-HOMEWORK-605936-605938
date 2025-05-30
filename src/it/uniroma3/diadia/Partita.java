@@ -20,7 +20,6 @@ public class Partita {
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private boolean finita;
-	private Borsa borsa;
 	private Giocatore giocatore;
 	private Labirinto labirinto;
 	
@@ -35,7 +34,6 @@ public class Partita {
 	public Partita(){
 		
 		this.setGiocatore(new Giocatore());
-		this.setBorsa(new Borsa());		
 		this.setLabirinto(new Labirinto());
 		this.stanzaCorrente = this.labirinto.getEntrata();
 		this.stanzaVincente = this.labirinto.getUscita();
@@ -64,14 +62,6 @@ public class Partita {
 	
 	public boolean getFinita() {
 		return this.finita;
-	}
-	
-	public Borsa getBorsa() {
-		return borsa;
-	}
-
-	public void setBorsa(Borsa borsa) {
-		this.borsa = borsa;
 	}
 	
 	public Labirinto getLabirinto() {
@@ -110,7 +100,7 @@ public class Partita {
 	
 	@Override
 	public String toString() {
-		return stanzaCorrente.toString() + "\n" + this.borsa.toString() + this.giocatore.toString();
+		return stanzaCorrente.toString() + this.giocatore.toString();
 	}
 
 	
