@@ -30,6 +30,8 @@ public class TestStanzaBuia {
 	@Test
 	void testAttrezzoLuminosoPresente() {
 		this.stanzaBuia.addAttrezzo(attrezzoLuminoso);
+		this.stanzaLuminosa.setNome("N10");
+		this.stanzaLuminosa.addAttrezzo(attrezzoLuminoso);
 		assertEquals(stanzaBuia.getDescrizione(), stanzaLuminosa.getDescrizione());
 	}
 }

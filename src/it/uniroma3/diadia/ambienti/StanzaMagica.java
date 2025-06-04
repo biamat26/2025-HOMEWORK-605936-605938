@@ -19,6 +19,10 @@ public class StanzaMagica extends Stanza {
 		this.contatoreAttrezziPosati = 0;
 	}
 
+	@Override
+	public boolean isMagica() {
+		return true;
+	}
 	
 	public int getContatoreAttrezziPosati() {
 		return contatoreAttrezziPosati;
@@ -53,7 +57,20 @@ public class StanzaMagica extends Stanza {
 		}
 
 		return super.addAttrezzo(attrezzo);
-
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode() + sogliaMagica;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(!super.equals(o)) return false;
+		if(o.getClass() != this.getClass()) return false;
+		StanzaMagica that = (StanzaMagica) o;
+		return this.sogliaMagica == that.sogliaMagica;
 	}
 
 	

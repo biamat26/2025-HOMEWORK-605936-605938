@@ -44,7 +44,7 @@ public class TestBorsa {
 	
 	@Test
 	void testAggiungoTroppiAttrezzi() {
-		for(int i = this.borsa.getNumeroAttrezzi(); i < Borsa.DEFAULT_NUMERO_MAX_ATTREZZI; i++) {
+		for(int i = this.borsa.getNumeroAttrezzi(); i <= Borsa.DEFAULT_NUMERO_MAX_ATTREZZI; i++) {
 			this.borsa.addAttrezzo(new Attrezzo("spada", 0));
 		}
 		

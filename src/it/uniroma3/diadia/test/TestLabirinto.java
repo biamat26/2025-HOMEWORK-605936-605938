@@ -19,18 +19,18 @@ class TestLabirinto {
 	
 	@Test
 	public void testEntrata() {
-		assertEquals("Atrio", labirinto.getEntrata().getNome());
+		assertEquals("Atrio", labirinto.getStanzaIniziale().getNome());
 	}
 	
 	@Test
 	public void testUscita() {
-		assertEquals("Biblioteca", labirinto.getUscita().getNome());
+		assertEquals("Biblioteca", labirinto.getStanzaVincente().getNome());
 	}
 	
 	@Test
 	public void testStanzeAdiacenti() {
-		assertEquals("Aula N11", labirinto.getEntrata().getStanzaAdiacente("est").getNome());
-		assertEquals("Atrio", labirinto.getUscita().getStanzaAdiacente("sud").getNome());
+		assertEquals("Aula N11", labirinto.getStanzaIniziale().getStanzaAdiacente("est").getNome());
+		assertEquals("Atrio", labirinto.getStanzaVincente().getStanzaAdiacente("sud").getNome());
 	}
 
 }

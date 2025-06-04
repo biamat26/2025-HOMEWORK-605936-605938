@@ -50,7 +50,7 @@ public class TestStanza {
 	
 	@Test
 	void testAggiungoTroppiElementi() {
-		for(int i = this.stanza.getNumeroAttrezzi(); i < this.stanza.getNumeroMassimoAttrezzi(); i++) {
+		for(int i = this.stanza.getNumeroAttrezzi(); i <= Stanza.NUMERO_MAX_ATTREZZI; i++) {
 			this.stanza.addAttrezzo(new Attrezzo("spada", 4));
 		}
 		assertFalse(this.stanza.addAttrezzo(new Attrezzo("spada", 4)));

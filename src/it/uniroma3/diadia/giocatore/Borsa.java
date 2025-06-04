@@ -16,7 +16,8 @@ public class Borsa {
 	
 
 	public static final int DEFAULT_PESO_MAX_BORSA = 10;
-
+	public static final int DEFAULT_NUMERO_MAX_ATTREZZI = 10;
+	
 	private Set<Attrezzo> attrezzi;
 	
 
@@ -66,32 +67,41 @@ public class Borsa {
 		return peso;
 	}
 	
+	public int getNumeroAttrezzi() {
+		return this.attrezzi.size();
+	}
 	
+	public void setPesoMax(int pesoMax) {
+		this.pesoMax = pesoMax;
+	}
 	
-	//Cose:
 	
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		
-		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax()) {
+		if(attrezzo == null) return false;
+		
+		if ((this.getPeso() + attrezzo.getPeso()) > this.getPesoMax() || this.getNumeroAttrezzi() > DEFAULT_NUMERO_MAX_ATTREZZI) {
 			return false;
 		}
 		return this.attrezzi.add(attrezzo);
 	}
+	
 	
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getAttrezzo(nomeAttrezzo);
 		return this.attrezzi.remove(a) ? a : null;
 	}
 	
+	
 	public boolean isEmpty() {
 		return this.attrezzi.isEmpty();
 	}
+	
 	
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.attrezzi.contains(this.getAttrezzo(nomeAttrezzo));
 	}
 
-	
 	
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		List<Attrezzo> lista = new ArrayList<>(this.getAttrezzi());
@@ -127,6 +137,12 @@ public class Borsa {
 		
 		return mappa;
 	}
+	
+
+
+	
+	
+	
 	
 	@Override
 	public String toString() {

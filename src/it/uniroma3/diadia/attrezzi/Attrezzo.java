@@ -16,42 +16,38 @@ public class Attrezzo {
 	private String nome;
 	private int peso;
 
-	/**
-	 * Crea un attrezzo
-	 * @param nome il nome che identifica l'attrezzo
-	 * @param peso il peso dell'attrezzo
-	 */
+
+	
 	public Attrezzo(String nome, int peso) {
 		this.peso = peso;
 		this.nome = nome;
 	}
 
-	/**
-	 * Restituisce il nome identificatore dell'attrezzo
-	 * @return il nome identificatore dell'attrezzo
-	 */
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Restituisce il peso dell'attrezzo
-	 * @return il peso dell'attrezzo
-	 */
 	public int getPeso() {
 		return this.peso;
 	}
 	
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode() + this.peso*31;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
+		if(o==null || o.getClass() != this.getClass()) return false;
 		Attrezzo that = (Attrezzo) o;
 		return this.getNome().equals(that.getNome()) && this.getPeso() == that.getPeso();
 	}
 	
-	/**
-	 * Restituisce una rappresentazione stringa di questo attrezzo
-	 * @return la rappresentazione stringa
-	 */
+	@Override
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}

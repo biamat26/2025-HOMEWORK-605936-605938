@@ -12,18 +12,16 @@ import org.junit.jupiter.api.BeforeEach;
 class TestPartita {
 
 		private Partita partita;
-		//private Stanza stanzaVincente;
 		
 		@BeforeEach
 		void setUp() throws Exception {
 			this.partita = new Partita();
-			//this.stanzaVincente = new Stanza("Biblioteca");
 		}
 		
 		@Test
 		void testInizializzazione() {
 			assertNotNull(partita.getStanzaCorrente());
-			assertEquals(partita.getLabirinto().getEntrata(), partita.getStanzaCorrente());
+			assertEquals(partita.getLabirinto().getStanzaIniziale(), partita.getStanzaCorrente());
 			assertNotNull(partita.getStanzaVincente());
 			assertEquals(20, partita.getGiocatore().getCfu());
 		}
