@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import it.uniroma3.diadia.Configurazione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
@@ -27,15 +28,14 @@ public class Stanza {
 	/**
 	 *  
 	 */
-	
-	public static final int NUMERO_MAX_ATTREZZI = 10;
-	
+		
 	private Set<Attrezzo> attrezzi;
    
-    private Map<String, Stanza> stanzeAdiacenti;
+    //private Map<String, Stanza> stanzeAdiacenti;
+    private Map<Direzione, Stanza> stanzeAdiacenti;
     
     private AbstractPersonaggio personaggio;
-    
+
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
      * @param nome il nome della stanza
@@ -47,11 +47,11 @@ public class Stanza {
     }
     
 
-    public Map<String, Stanza> getMapStanzeAdiacenti(){
+    public Map<Direzione, Stanza> getMapStanzeAdiacenti(){
     	return this.stanzeAdiacenti;
     }
 
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -79,7 +79,7 @@ public class Stanza {
     	return this.attrezzi;
     }
  
-    public Set<String> getDirezioni(){
+    public Set<Direzione> getDirezioni(){
     	return this.stanzeAdiacenti.keySet();
     }
     
@@ -97,24 +97,24 @@ public class Stanza {
 		return personaggio;
 	}
 
-
 	public void setPersonaggio(AbstractPersonaggio personaggio) {
 		this.personaggio = personaggio;
 	}
     
     public boolean addAttrezzo(Attrezzo attrezzo) {
-    	if(attrezzo == null || this.getNumeroAttrezzi() > Stanza.NUMERO_MAX_ATTREZZI) {
+    	if(attrezzo == null || this.getNumeroAttrezzi() > Configurazione.getNumeroMaxAttrezziStanzaDefault()) {
     		return false;
     	}
     	return attrezzi.add(attrezzo);
     }
 
     
-    public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+    public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
     	if(this.stanzeAdiacenti.keySet().size()>=4 && !this.stanzeAdiacenti.containsKey(direzione)) {
     		return;
     	}
     	this.stanzeAdiacenti.put(direzione, stanza);
+    	stanza.stanzeAdiacenti.put(direzione.getDirezioneOpposta(), this);
     }
 
     
@@ -162,8 +162,8 @@ public class Stanza {
     	risultato.append(this.nome);
     	risultato.append("\nUscite: ");
     	
-    	for(String direzione : this.stanzeAdiacenti.keySet()) {
-    		risultato.append(" " + direzione);
+    	for(Direzione direzione : this.stanzeAdiacenti.keySet()) {
+    		risultato.append(" " + direzione.toString());
     	}
     	
     	risultato.append("\nAttrezzi nella stanza:");

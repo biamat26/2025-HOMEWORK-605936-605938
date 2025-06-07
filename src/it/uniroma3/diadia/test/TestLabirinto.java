@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
 
 class TestLabirinto {
 	
@@ -29,8 +29,8 @@ class TestLabirinto {
 	
 	@Test
 	public void testStanzeAdiacenti() {
-		assertEquals("Aula N11", labirinto.getStanzaIniziale().getStanzaAdiacente("est").getNome());
-		assertEquals("Atrio", labirinto.getStanzaVincente().getStanzaAdiacente("sud").getNome());
+		assertEquals("Aula N11", labirinto.getStanzaIniziale().getStanzaAdiacente(Direzione.EST).getNome());
+		assertEquals("Atrio", labirinto.getStanzaVincente().getStanzaAdiacente(Direzione.SUD).getNome());
 	}
 
 }

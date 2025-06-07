@@ -33,8 +33,6 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi{
 			comando = tipo.getDeclaredConstructor().newInstance();		
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-			System.out.println(nomeTipo.toString());
-			e.printStackTrace();
 			return new ComandoNonValido();
 		} 
 		

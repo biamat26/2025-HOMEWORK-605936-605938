@@ -1,31 +1,26 @@
 package it.uniroma3.diadia.personaggi;
 
+import it.uniroma3.diadia.Configurazione;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Mago extends AbstractPersonaggio{
 
-	
-	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " +
-			"con una mia magica azione, troverai un nuovo oggetto " +
-			"per il tuo borsone!";
-	
-	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
+		
 	
 	private Attrezzo attrezzo;
 	
-	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
+	public Mago(String nome, Attrezzo attrezzo, String presentazione) {
 		super(nome, presentazione);
 		this.attrezzo = attrezzo;
 	}
 
 	@Override
 	public String agisci(Partita partita) {
-		if(attrezzo == null) return Mago.MESSAGGIO_SCUSE;
-		
+		if(attrezzo == null) return Configurazione.getMessaggioScuseMagoDefault();		
 		partita.getStanzaCorrente().addAttrezzo(attrezzo);
 		this.attrezzo = null;
-		return Mago.MESSAGGIO_DONO;
+		return Configurazione.getMessaggioDonoMagoDefault();
 	}
 
 	@Override

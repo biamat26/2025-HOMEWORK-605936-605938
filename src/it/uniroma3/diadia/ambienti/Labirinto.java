@@ -64,25 +64,21 @@ public class Labirinto {
 		
     	
 		/* crea stanze del labirinto */
-		Stanza atrio = new StanzaBloccata("Atrio", "nord", "chiave");
+		Stanza atrio = new StanzaBloccata("Atrio", Direzione.NORD, "chiave");
 		Stanza aulaN11 = new Stanza("Aula N11");
 		Stanza aulaN10 = new StanzaBuia("Aula N10", "lanterna");
 		Stanza laboratorio = new StanzaMagica("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
+		atrio.impostaStanzaAdiacente(Direzione.NORD, biblioteca);
+		atrio.impostaStanzaAdiacente(Direzione.EST, aulaN11);
+		atrio.impostaStanzaAdiacente(Direzione.SUD, aulaN10);
+		atrio.impostaStanzaAdiacente(Direzione.OVEST, laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzione.EST, laboratorio);
+		aulaN10.impostaStanzaAdiacente(Direzione.EST, aulaN11);
+		aulaN10.impostaStanzaAdiacente(Direzione.OVEST, laboratorio);
+
 
         /* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);

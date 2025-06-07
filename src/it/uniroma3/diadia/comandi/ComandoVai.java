@@ -1,19 +1,30 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai extends AbstractComando{
 
-	private String direzione;
+	private String nomeDirezione;
+	private Direzione direzione;
 	
 	@Override
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		
-		if(this.direzione == null) {
+		nomeDirezione = this.getParametro();
+		
+		if(this.nomeDirezione == null) {
 			io.mostraMessaggio("Dove vuoi andare?");
+			return;
+		}		
+		
+		try {
+			direzione = Direzione.valueOf(nomeDirezione.toUpperCase());
+		}catch(IllegalArgumentException e) {
+			io.mostraMessaggio("Direzione inesistente");
+			return;
 		}
 		
 		Stanza prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(this.direzione);

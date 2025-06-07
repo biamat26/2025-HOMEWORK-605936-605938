@@ -5,40 +5,27 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import it.uniroma3.diadia.Configurazione;
 import it.uniroma3.diadia.attrezzi.*;
 
 public class Borsa {
 	
-
-	public static final int DEFAULT_PESO_MAX_BORSA = 10;
-	public static final int DEFAULT_NUMERO_MAX_ATTREZZI = 10;
-	
 	private Set<Attrezzo> attrezzi;
-	
-
 	private int pesoMax;
 	
-	
-	//Costruttori
-	
 	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA);
+		this(Configurazione.getPesoMaxBorsaDefault());
 	}
 	
 	public Borsa(int pesoMax) {
-		this.pesoMax = pesoMax;
 		this.attrezzi = new HashSet<>();
+		this.pesoMax = pesoMax;
 	}
-	
-	
-	//Getter & Setter
-	
-	
+		
 	public Set<Attrezzo> getAttrezzi() {
 		return attrezzi;
 	}
@@ -49,6 +36,10 @@ public class Borsa {
 	
 	public int getPesoMax() {
 		return pesoMax;
+	}
+	
+	public void setPesoMax(int pesoMax) {
+		this.pesoMax = pesoMax;
 	}
 	
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
@@ -71,16 +62,11 @@ public class Borsa {
 		return this.attrezzi.size();
 	}
 	
-	public void setPesoMax(int pesoMax) {
-		this.pesoMax = pesoMax;
-	}
-	
-	
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		
 		if(attrezzo == null) return false;
 		
-		if ((this.getPeso() + attrezzo.getPeso()) > this.getPesoMax() || this.getNumeroAttrezzi() > DEFAULT_NUMERO_MAX_ATTREZZI) {
+		if ((this.getPeso() + attrezzo.getPeso()) > this.getPesoMax() || this.getNumeroAttrezzi() > Configurazione.getPesoMaxBorsaDefault()) {
 			return false;
 		}
 		return this.attrezzi.add(attrezzo);

@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class TestStanzaBloccata {
 	
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 	private String attrezzoSblocco;
 	private Stanza stanzaBloccata;
 	private Stanza stanzaAdiacente;
@@ -20,7 +21,7 @@ public class TestStanzaBloccata {
 	@BeforeEach
 	void setUp() {
 		
-		this.direzioneBloccata = "nord";
+		this.direzioneBloccata = Direzione.NORD;
 		this.attrezzoSblocco = "chiave";
 		
 		this.stanzaBloccata = new StanzaBloccata("atrio", direzioneBloccata, attrezzoSblocco);

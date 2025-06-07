@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class LabirintoBuilder {
 	
@@ -56,7 +60,8 @@ public class LabirintoBuilder {
 	}
 	
 	public LabirintoBuilder addStanzaBloccata(String nomeStanzaBloccata, String direzioneBloccata, String attrezzoSblocco) {
-		Stanza stanzaBloccata = new StanzaBloccata(nomeStanzaBloccata, direzioneBloccata, attrezzoSblocco);
+		if(Direzione.valueOf(direzioneBloccata.toUpperCase()) == null) throw new IllegalArgumentException("Direzione inesistente");
+		Stanza stanzaBloccata = new StanzaBloccata(nomeStanzaBloccata, Direzione.valueOf(direzioneBloccata.toUpperCase()), attrezzoSblocco);
 		return add(stanzaBloccata);
 	}
 	
@@ -71,22 +76,40 @@ public class LabirintoBuilder {
 		return this;
 	}
 
-	public LabirintoBuilder addAdiacenza(String nomeStanzaPartenza, String nomeStanzaDestinazione, String direzione) {
-		
+	public LabirintoBuilder addAdiacenza(String nomeStanzaPartenza, String nomeStanzaDestinazione, String nomeDirezione) {
 		Stanza stanzaPartenza = this.stanze.get(nomeStanzaPartenza);
-		
 		Stanza stanzaDestinazione = this.stanze.get(nomeStanzaDestinazione);
-		
-		if(stanzaPartenza == null || stanzaDestinazione == null) {
-			return this;
-		}
-		
+		Direzione direzione = Direzione.valueOf(nomeDirezione.toUpperCase());
+		if(direzione == null || stanzaPartenza == null || stanzaDestinazione == null ) throw new IllegalArgumentException("Direzione inesistente");
 		stanzaPartenza.impostaStanzaAdiacente(direzione, stanzaDestinazione);
+		return this;
+	}
+	
+	public LabirintoBuilder addPersonaggio(AbstractPersonaggio personaggio, Stanza stanza) {
+		if(stanza != null) 	stanza.setPersonaggio(personaggio);
+		else throw new IllegalArgumentException("La stanza non è presente nel labirinto");
 		
 		return this;
 	}
 	
+	public LabirintoBuilder addCane(String nome, String attrezzo, int peso, String presentazione, String stanza) {
+		return addCane(nome, attrezzo, peso, presentazione, Cane.CIBO_PREFERITO_DEFAULT, stanza);
+	}
 	
+	public LabirintoBuilder addCane(String nome, String attrezzo, int peso, String presentazione, String ciboPreferito, String stanza) {
+		AbstractPersonaggio cane = new Cane(nome, new Attrezzo(nome, peso), presentazione, ciboPreferito);
+		return addPersonaggio(cane, getListaStanze().get(stanza));
+	}
+	
+	public LabirintoBuilder addMago(String nome, String attrezzo, int peso, String presentazione, String stanza) {
+		AbstractPersonaggio mago = new Mago(nome, new Attrezzo(attrezzo, peso), presentazione);
+		return addPersonaggio(mago, getListaStanze().get(stanza));
+	}
+	
+	public LabirintoBuilder addStrega(String nome, String presentazione, String stanza) {
+		AbstractPersonaggio strega = new Strega(nome, presentazione);
+		return addPersonaggio(strega, getListaStanze().get(stanza));
+	}
 	
 	
 	public Labirinto getLabirinto() {

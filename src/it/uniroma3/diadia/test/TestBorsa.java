@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import it.uniroma3.diadia.Configurazione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
@@ -34,20 +35,19 @@ public class TestBorsa {
 	
 	@Test
 	void testPesoBorsaMax() {
-		assertEquals(borsa.getPesoMax(), Borsa.DEFAULT_PESO_MAX_BORSA, "il peso massimo dev'essere 10");
+		assertEquals(borsa.getPesoMax(), Configurazione.getPesoMaxBorsaDefault(), "il peso massimo dev'essere 10");
 	}
 	
 	@Test
 	void testAggiungoAttrezzoTroppoPesante() {
-		assertFalse(this.borsa.addAttrezzo(new Attrezzo("spada", Borsa.DEFAULT_PESO_MAX_BORSA + 1)));
+		assertFalse(this.borsa.addAttrezzo(new Attrezzo("spada", Configurazione.getPesoMaxBorsaDefault() + 1)));
 	}
 	
 	@Test
 	void testAggiungoTroppiAttrezzi() {
-		for(int i = this.borsa.getNumeroAttrezzi(); i <= Borsa.DEFAULT_NUMERO_MAX_ATTREZZI; i++) {
+		for(int i = this.borsa.getNumeroAttrezzi(); i <= Configurazione.getNumeroMaxAttrezziBorsaDefault(); i++) {
 			this.borsa.addAttrezzo(new Attrezzo("spada", 0));
 		}
-		
 		assertFalse(this.borsa.addAttrezzo(new Attrezzo("spada", 0)));
 		
 	}
@@ -66,17 +66,4 @@ public class TestBorsa {
 	void testRemoveAttrezzo() {
 		assertNotNull(this.borsa.removeAttrezzo("lanterna"));
 	}
-	
-	
-/*	
-	@Test
-	void testBorsaConPeso() {
-		assertEquals(borsa.getPeso(), 0, "il peso della borsa dovrebbe essere inizializzato 0");
-	}
-	
-	@Test
-	void testBorsaInizialeVuota() {
-		assertTrue(borsa.getNumeroAttrezzi() == 0);
-	}
-*/
 }

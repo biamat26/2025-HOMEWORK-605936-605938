@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.comandi.ComandoVai;
-import it.uniroma3.diadia.giocatore.Giocatore;
+
 
 class TestComandoVai {
 
@@ -48,7 +48,7 @@ class TestComandoVai {
 
 	@Test
 	void testVaiInDirezioneNonConsentita() {
-		this.partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente("sud"));
+		this.partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente(Direzione.SUD));
 		this.stanzaVecchia = this.partita.getStanzaCorrente();
 		int cfu = this.partita.getGiocatore().getCfu();
 		comando.setParametro("sud");

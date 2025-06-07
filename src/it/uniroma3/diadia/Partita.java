@@ -1,8 +1,6 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.giocatore.Borsa;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -15,16 +13,12 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	
-
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private boolean finita;
 	private Giocatore giocatore;
 	private Labirinto labirinto;
 	
-	
-
 	public Partita(){
 		
 		this.setGiocatore(new Giocatore());
@@ -34,7 +28,6 @@ public class Partita {
 		this.finita = false;
 	}
 
-	
 	public Giocatore getGiocatore() {
 		return giocatore;
 	}
@@ -92,17 +85,8 @@ public class Partita {
 		return finita || vinta() || persa();
 	}
 
-	/**
-	 * Imposta la partita come finita
-	 *
-	 */
-	
 	@Override
 	public String toString() {
 		return stanzaCorrente.toString() + this.giocatore.toString();
-	}
-
-	
-
-	
+	}	
 }

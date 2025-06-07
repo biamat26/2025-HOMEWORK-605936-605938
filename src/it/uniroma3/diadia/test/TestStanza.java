@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.Configurazione;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -17,7 +19,7 @@ public class TestStanza {
 	void setUp() throws Exception {
 		this.stanza = new Stanza("N11");
 		this.stanzaAdiacente = new Stanza("N12");
-		this.stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
+		this.stanza.impostaStanzaAdiacente(Direzione.NORD, stanzaAdiacente);
 		
 		this.attrezzo = new Attrezzo("spada", 4);
 		this.stanza.addAttrezzo(attrezzo);
@@ -25,12 +27,12 @@ public class TestStanza {
 	
 	@Test
 	void testStanzaAdiacente() {
-		assertEquals(this.stanza.getStanzaAdiacente("nord"), this.stanzaAdiacente);
+		assertEquals(this.stanza.getStanzaAdiacente(Direzione.NORD), this.stanzaAdiacente);
 	}
 	
 	@Test
 	void testStanzaAdiacenteNonPresente() {
-		assertNotEquals(this.stanza.getStanzaAdiacente("sud"), this.stanzaAdiacente);
+		assertNotEquals(this.stanza.getStanzaAdiacente(Direzione.SUD), this.stanzaAdiacente);
 	}
 	
 	@Test 
@@ -50,7 +52,7 @@ public class TestStanza {
 	
 	@Test
 	void testAggiungoTroppiElementi() {
-		for(int i = this.stanza.getNumeroAttrezzi(); i <= Stanza.NUMERO_MAX_ATTREZZI; i++) {
+		for(int i = this.stanza.getNumeroAttrezzi(); i <= Configurazione.getNumeroMaxAttrezziStanzaDefault(); i++) {
 			this.stanza.addAttrezzo(new Attrezzo("spada", 4));
 		}
 		assertFalse(this.stanza.addAttrezzo(new Attrezzo("spada", 4)));

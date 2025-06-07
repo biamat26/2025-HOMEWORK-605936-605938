@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -10,6 +9,16 @@ public class ComandoPosa extends AbstractComando{
 	
 	@Override
 	public void esegui(Partita partita) {
+		
+		
+		
+		if(this.getParametro() == null) {
+			io.mostraMessaggio("Non ha inserito alcun attrezzo da posare");
+			return;
+		}
+		
+		this.nomeAttrezzo = getParametro();
+		
 		Attrezzo attrezzo = partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
 		
 		if(attrezzo == null) {

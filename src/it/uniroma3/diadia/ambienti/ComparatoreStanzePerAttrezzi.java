@@ -2,8 +2,6 @@ package it.uniroma3.diadia.ambienti;
 
 import java.util.Comparator;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-
 public class ComparatoreStanzePerAttrezzi implements Comparator<Stanza>{
 
 	@Override

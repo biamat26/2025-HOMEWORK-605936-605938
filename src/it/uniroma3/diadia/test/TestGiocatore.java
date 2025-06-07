@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.Configurazione;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 class TestGiocatore {
@@ -23,7 +24,7 @@ class TestGiocatore {
 
 	@Test
 	void testInizializzazioneCFU() {
-		assertEquals(this.giocatore.getCFU_INIZIALI(), this.giocatore.getCfu());
+		assertEquals(Configurazione.getCfuIniziali(), this.giocatore.getCfu());
 	}
 
 	@Test

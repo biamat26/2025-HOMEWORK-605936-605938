@@ -1,12 +1,14 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.Configurazione;
+
 public class Giocatore {
-	final private int CFU_INIZIALI = 20;
+
 	private int cfu;
 	private Borsa borsa;
 	
 	public Giocatore() {
-		setCfu(CFU_INIZIALI);
+		setCfu(Configurazione.getCfuIniziali());
 		this.setBorsa(new Borsa());
 	}
 
@@ -16,10 +18,6 @@ public class Giocatore {
 
 	public void setCfu(int cfu) {
 		this.cfu = cfu;
-	}
-	
-	public int getCFU_INIZIALI() {
-		return this.CFU_INIZIALI;
 	}
 	
 	public void mossa() {

@@ -10,10 +10,10 @@ public class Cane extends AbstractPersonaggio{
 	private Attrezzo attrezzo;
 	
 	public Cane(String nome, Attrezzo attrezzo, String presentazione) {
-		this(nome, presentazione, attrezzo, CIBO_PREFERITO_DEFAULT);
+		this(nome, attrezzo, presentazione, CIBO_PREFERITO_DEFAULT);
 	}
 	
-	public Cane(String nome, String presentazione, Attrezzo attrezzo, String ciboPreferito) {
+	public Cane(String nome, Attrezzo attrezzo, String presentazione, String ciboPreferito) {
 		super(nome, presentazione);
 		this.attrezzo = attrezzo;
 		this.ciboPreferito = ciboPreferito;

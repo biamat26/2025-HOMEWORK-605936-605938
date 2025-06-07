@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +55,7 @@ class TestPartita {
 		void testCambioStanza() {
 			Stanza stanzaCorrente = partita.getStanzaCorrente();
 			Stanza stanzaAdiacente = new Stanza("Stanza adiacente");
-			stanzaCorrente.impostaStanzaAdiacente("nord", stanzaAdiacente);
+			stanzaCorrente.impostaStanzaAdiacente(Direzione.NORD, stanzaAdiacente);
 			partita.setStanzaCorrente(stanzaAdiacente);
 			assertEquals(stanzaAdiacente, partita.getStanzaCorrente());
 		}
