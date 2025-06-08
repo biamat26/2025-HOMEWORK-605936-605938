@@ -9,15 +9,15 @@ public class ComandoRegala extends AbstractComando{
 	@Override
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
-		Attrezzo attrezzo = stanzaCorrente.getAttrezzo(getParametro());
+		System.out.println(getParametro());
 		
-		if(attrezzo == null) io.mostraMessaggio("Non hai messo nessun attrezzo");
+		Attrezzo attrezzo = partita.getGiocatore().getBorsa().getAttrezzo(getParametro());
 		
-		if(!partita.getGiocatore().getBorsa().hasAttrezzo(attrezzo.getNome())){
-			io.mostraMessaggio("Non hai " + attrezzo.getNome() + " nella borsa...");
+		if(attrezzo == null) {
+			io.mostraMessaggio("Non hai messo nessun attrezzo");
 			return;
 		}
-	
+		
 		io.mostraMessaggio(stanzaCorrente.getPersonaggio().riceviRegalo(attrezzo, partita));
 	}
 

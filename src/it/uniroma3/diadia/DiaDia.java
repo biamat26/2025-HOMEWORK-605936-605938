@@ -1,4 +1,8 @@
 package it.uniroma3.diadia;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import it.uniroma3.diadia.ambienti.CaricatoreLabirinto;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
@@ -38,13 +42,14 @@ public class DiaDia {
 	}
 
 	public DiaDia(Labirinto labirinto, IO io) {
-		// fa cose...
+		this.partita = new Partita(labirinto);
+		this.console = io;
 	}
 	
 	
 	public void gioca() {
 		String istruzione; 
-		console.mostraMessaggio(MESSAGGIO_BENVENUTO);			
+		console.mostraMessaggio(MESSAGGIO_BENVENUTO);	
 		do {	
 			istruzione = console.leggiRiga();
 		
@@ -70,15 +75,21 @@ public class DiaDia {
 		return partita.isFinita();
 	}
 	
-//vai, posa, prendi, fabbrica comandi, fabbricaComandiFisarmonica, stanza buia, stanza bloccata, stanza maggica
-	
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws FormatoFileNonValidoException, RuntimeException {
 		
 		// IO io = IOConsole.getInstance(); Modo per creare una sola instanza di IOConsole, con il pattern Singleton
+		try(Scanner scanner = new Scanner(System.in)){
+			IO io = new IOConsole(scanner);
+			try {
+		        CaricatoreLabirinto caricatore = new CaricatoreLabirinto("labirinto.txt");
+		        caricatore.carica();
+		        Labirinto labirinto = caricatore.getLabirinto();  // ← costruito da file
+		        DiaDia gioco = new DiaDia(labirinto, io);
+		        gioco.gioca();
+		    } catch (FileNotFoundException e) {
+		        io.mostraMessaggio("Errore: file labirinto non trovato.");
+		    }
+		}
 		
-		IO io = new IOConsole();
-		//Labirinto labirinto = new LabirintoBuilder();
-		DiaDia gioco = new DiaDia(io);
-		gioco.gioca();
 	}
 }

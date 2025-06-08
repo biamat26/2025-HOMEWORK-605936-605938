@@ -33,4 +33,19 @@ class TestLabirinto {
 		assertEquals("Atrio", labirinto.getStanzaVincente().getStanzaAdiacente(Direzione.SUD).getNome());
 	}
 
+	@Test
+	void testCostruzioneLabirinto() {
+		Labirinto lab = Labirinto.newBuilder()
+			.addStanzaIniziale("Atrio")
+			.addStanzaVincente("Biblioteca")
+			.addStanza("Aula")
+			.addAttrezzo("chiave", 1)
+			.addAdiacenza("Atrio", "Biblioteca", "nord")
+			.getLabirinto();
+
+		assertNotNull(lab.getStanzaIniziale());
+		assertEquals("Atrio", lab.getStanzaIniziale().getNome());
+		assertEquals("Biblioteca", lab.getStanzaVincente().getNome());
+		assertTrue(lab.getStanzaIniziale().getStanzaAdiacente(Direzione.NORD).getNome().equals("Biblioteca"));
+	}
 }

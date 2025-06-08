@@ -22,7 +22,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi{
 		if (scannerDiParole.hasNext()) {
 			parametro = scannerDiParole.next(); // seconda parola: eventuale param.
 		}
-		
+		if(nomeComando == null) return new ComandoNonValido();
 		StringBuilder nomeTipo = new StringBuilder("it.uniroma3.diadia.comandi.Comando");
 		nomeTipo.append(nomeComando.toUpperCase().charAt(0));
 		nomeTipo.append(nomeComando.substring(1));

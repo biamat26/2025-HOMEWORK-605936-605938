@@ -51,7 +51,7 @@ public class StanzaBloccata extends Stanza{
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Direzione bloccata: " + this.direzioneBloccata + "\n";
+		return super.toString() + "\nDirezione bloccata: " + this.direzioneBloccata + "\n";
 	}
 
 	

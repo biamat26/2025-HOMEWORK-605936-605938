@@ -38,5 +38,4 @@ public class Cane extends AbstractPersonaggio{
 		
 		return agisci(partita);
 	}
-
 }

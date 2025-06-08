@@ -1,10 +1,10 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-import java.lang.invoke.StringConcatFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,22 +40,31 @@ public class CaricatoreLabirinto {
 	private static final String STANZE_BUIE_MARKER= "Buie:";
 	
 	/** prefisso della riga contenente le specifiche dei cani da collocare */
-	private static final String CANE_MARKER = "Cane:";
+	private static final String CANE_MARKER = "Cani:";
 	
 	/** prefisso della riga contenente le specifiche dei maghi da collocare */
-	private static final String MAGO_MARKER = "Mago:";
+	private static final String MAGO_MARKER = "Maghi:";
 	
 	/** prefisso della riga contenente le specifiche delle streghe da collocare */
-	private static final String STREGA_MARKER = "Strega:";
+	private static final String STREGA_MARKER = "Streghe:";
 	
 	/** tiene traccia del numero di riga mentre leggi un file riga per riga*/
 	private LineNumberReader reader;
-	private LabirintoBuilder builder;
+	private Labirinto.LabirintoBuilder builder;
 	
 	
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
+		InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFile);
+	    if (input == null) {
+	        throw new IllegalArgumentException("File non trovato: " + nomeFile);
+	    }
+	    this.reader = new LineNumberReader(new InputStreamReader(input));
+	    this.builder = Labirinto.newBuilder(); // se hai reso Builder statico interno
+		
+		/**
 		this.reader = new LineNumberReader(new FileReader(nomeFile));
-		this.builder = new LabirintoBuilder();
+		this.builder = new Labirinto.LabirintoBuilder();
+		*/
 	}
 	
 	public Labirinto getLabirinto() {
@@ -64,14 +73,14 @@ public class CaricatoreLabirinto {
 	
 	public void carica() throws FormatoFileNonValidoException, RuntimeException{
 		try{
-			this.leggiECreaStanze();
+			this.leggiECreaStanze();	
+			this.leggiStanzeBloccate();
+			this.leggiStanzeBuie();
+			this.leggiStanzeMagiche();
 			this.leggiStanzaIniziale();
 			this.leggiStanzaVincente();
 			this.leggiECollocaAttrezzi();
 			this.leggiECollocaUscita();
-			this.leggiStanzeBloccate();
-			this.leggiStanzeMagiche();
-			this.leggiStanzeBuie();
 			this.leggiECollocaCane();
 			this.leggiECollocaMago();
 			this.leggiECollocaStrega();
@@ -95,15 +104,15 @@ public class CaricatoreLabirinto {
 	}
 	
 	private void leggiStanzaIniziale() throws FormatoFileNonValidoException {
-		String nomeStanzaIniziale= leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
+		String nomeStanzaIniziale= leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER).trim();
 		check(this.isStanzaValida(nomeStanzaIniziale), nomeStanzaIniziale + " non definita");
-		this.builder.addStanzaIniziale(nomeStanzaIniziale);
+		this.builder.setStanzaIniziale(nomeStanzaIniziale);
 	}
 	
 	private void leggiStanzaVincente() throws FormatoFileNonValidoException{
-		String nomeStanzaVincente = leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
+		String nomeStanzaVincente = leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER).trim();
 		check(this.isStanzaValida(nomeStanzaVincente), nomeStanzaVincente + " non definita");
-		this.builder.addStanzaVincente(nomeStanzaVincente);
+		this.builder.setStanzaVincente(nomeStanzaVincente);
 	}
 	
 	private void leggiStanzeBloccate() throws FormatoFileNonValidoException {
@@ -250,8 +259,8 @@ public class CaricatoreLabirinto {
 				presentazione = sc.next();
 				check(sc.hasNext(),msgTerminazionePrecoce("la stanza dove sta il mago"));
 				nomeStanza = sc.next();
-			
 			}
+			
 			
 			int peso = getNumber(pesoString, "Attrezzo "+ nomeAttrezzo+" non collocabile: peso " +pesoString+" non valido.");
 			
@@ -291,11 +300,15 @@ public class CaricatoreLabirinto {
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
 		try {
 			String riga = this.reader.readLine();
+			if (riga != null) {
+	            riga = riga.trim();  // <-- aggiungi questo per pulire spazi bianchi
+	        }
 			check(riga.startsWith(marker), "Era attesa una riga che cominciasse per: " + marker);
 			return riga.substring(marker.length());
 		}catch(IOException e) {
 			throw new FormatoFileNonValidoException();
 		}
+	
 	}
 	
 	private List<String> separaStringheAlleVirgole(String string){

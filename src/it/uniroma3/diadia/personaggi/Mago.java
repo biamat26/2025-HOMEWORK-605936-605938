@@ -6,8 +6,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Mago extends AbstractPersonaggio{
 
-		
-	
 	private Attrezzo attrezzo;
 	
 	public Mago(String nome, Attrezzo attrezzo, String presentazione) {

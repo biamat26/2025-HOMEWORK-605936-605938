@@ -3,21 +3,12 @@ import java.util.Scanner;
 
 public class IOConsole implements IO{
 	
-/*
-	private static IOConsole ioConsole;
+	private Scanner scanner; 
 	
-	
-	private IOConsole() {
-		
+	public IOConsole(Scanner sc) {
+		this.scanner = sc;
 	}
 	
-	public static IOConsole getInstance() {
-		if(ioConsole == null) {
-			ioConsole = new IOConsole();
-		}
-		return ioConsole;
-	}
-*/
 	
 	@Override
 	public void mostraMessaggio(String msg) {
@@ -26,8 +17,6 @@ public class IOConsole implements IO{
 	
 	@Override
 	public String leggiRiga() {
-		Scanner scannerDiLinee = new Scanner(System.in);
-		String riga = scannerDiLinee.nextLine();
-		return riga;
+		return scanner.nextLine();
 	}
 }

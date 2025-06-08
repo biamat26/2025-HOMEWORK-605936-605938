@@ -16,15 +16,11 @@ public abstract class AbstractPersonaggio {
 	
 	abstract public String agisci(Partita partita);
 	
-	public String getNome() {
-		return this.nome;
-	}
-	
 	abstract public String riceviRegalo(Attrezzo attrezzo, Partita partita);
 	
 	public String saluta() {
 		StringBuilder risposta = new StringBuilder("Ciao, io sono ");
-		risposta.append(this.getNome()+".");
+		risposta.append(this.getNome()+". ");
 		if(!haSalutato) {
 			risposta.append(this.presentazione);
 		}else {
@@ -32,6 +28,10 @@ public abstract class AbstractPersonaggio {
 		}
 		this.haSalutato = true;
 		return risposta.toString();
+	}
+	
+	public String getNome() {
+		return this.nome;
 	}
 	
 	@Override

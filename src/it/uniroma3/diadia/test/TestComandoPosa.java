@@ -2,6 +2,8 @@ package it.uniroma3.diadia.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,7 @@ class TestComandoPosa {
 		this.attrezzo = new Attrezzo("martello", 5);
 		this.partita = new Partita();
 		this.comando = new ComandoPosa();
-		this.ioConsole = new IOConsole();
+		this.ioConsole = new IOConsole(new Scanner(System.in));
 		comando.setIOConsole(ioConsole);
 	}
 	

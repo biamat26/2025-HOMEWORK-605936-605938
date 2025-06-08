@@ -34,7 +34,7 @@ public class Stanza {
     //private Map<String, Stanza> stanzeAdiacenti;
     private Map<Direzione, Stanza> stanzeAdiacenti;
     
-    private AbstractPersonaggio personaggio;
+    protected AbstractPersonaggio personaggio;
 
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -56,7 +56,9 @@ public class Stanza {
 	}
 
 	public SortedSet<Stanza> getStanzeAdiacentiOrdinate(){
-		return new TreeSet<>(new ComparatoreStanzePerAttrezzi()); 
+		SortedSet<Stanza> stanzeOrdinate = new TreeSet<>(new ComparatoreStanzePerAttrezzi());
+	    stanzeOrdinate.addAll(this.stanzeAdiacenti.values());
+	    return stanzeOrdinate; 
 	}
 	
     public String getNome() {
@@ -101,6 +103,8 @@ public class Stanza {
 		this.personaggio = personaggio;
 	}
     
+	
+	
     public boolean addAttrezzo(Attrezzo attrezzo) {
     	if(attrezzo == null || this.getNumeroAttrezzi() > Configurazione.getNumeroMaxAttrezziStanzaDefault()) {
     		return false;
@@ -171,7 +175,10 @@ public class Stanza {
     	for(Attrezzo a : this.attrezzi) {
     		risultato.append(a.toString() + " ");
     	}
-       	
-    	return risultato.toString();
+    	
+    	risultato.append("\nPersonaggi nella stanza: ");
+       	if(this.getPersonaggio() != null) risultato.append(this.getPersonaggio().toString());
+    	
+       	return risultato.toString();
     }	
 }

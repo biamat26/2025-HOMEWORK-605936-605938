@@ -3,26 +3,32 @@ package it.uniroma3.diadia;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Configurazione {
 
-    private static final String CONFIG_FILE = "diadia.properties";
+    private static final String CONFIG_FILE = "/diadia.properties";
     private static final HashMap<String, String> valori = new HashMap<>();
      
     static {
-        try (BufferedReader br = new BufferedReader(new FileReader(CONFIG_FILE))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                linea = linea.trim();
-                if (linea.isEmpty() || linea.startsWith("#")) continue; // commenti o righe vuote
-                String[] parti = linea.split("=");
-                if (parti.length == 2)
-                    valori.put(parti[0].trim(), parti[1].trim());
+        try (InputStream is = Configurazione.class.getResourceAsStream(CONFIG_FILE);
+             Scanner scanner = new Scanner(is)) {
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine().trim();
+                if (line.isEmpty() || line.startsWith("#")) continue;
+
+                String[] parts = line.split("=");
+                if (parts.length == 2) {
+                    valori.put(parts[0].trim(), parts[1].trim());
+                }
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             System.err.println("Errore nella lettura di " + CONFIG_FILE + ": " + e.getMessage());
-            System.exit(1); // terminare se manca configurazione
+            System.exit(1); // o imposta valori di default
         }
     }
 

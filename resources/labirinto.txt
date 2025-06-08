@@ -1,0 +1,11 @@
+Stanze: N11, Biblioteca, Campus, Mensa
+Bloccate: Atrio nord chiave
+Buie: N10 lanterna
+Magiche: Laboratorio 1
+Inizio: Atrio
+Vincente: Biblioteca
+Attrezzi: osso 1 Mensa, lanterna 3 N10, lancia 4 Atrio, scudo 7 Atrio, carte 1 N11, computer 7 Campus, pizza 2 Mensa
+Uscite: Atrio nord Biblioteca, Atrio est N11, Atrio sud N10, Atrio ovest Laboratorio, N11 est Laboratorio, N10 est N11, N10 ovest Laboratorio, Atrio sud Campus, Campus est Mensa, Mensa nord N11
+Cani: Fido chiave 2 "GRRR!" Campus osso
+Maghi: Gandalf bacchetta 1 "Non_Puoi_Passare!" N11
+Streghe: Morgana "Ti_Osservo_Da_Tempo..." Atrio

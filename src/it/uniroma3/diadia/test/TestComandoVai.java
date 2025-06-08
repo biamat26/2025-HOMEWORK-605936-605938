@@ -2,6 +2,8 @@ package it.uniroma3.diadia.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,7 @@ class TestComandoVai {
 	@BeforeEach
 	void setUp() throws Exception {
 		this.comando = new ComandoVai();
-		this.console = new IOConsole();
+		this.console = new IOConsole(new Scanner(System.in));
 		comando.setIOConsole(console);
 		this.partita = new Partita();
 		this.stanzaVecchia = partita.getStanzaCorrente();
